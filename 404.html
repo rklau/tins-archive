@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found – tins ::: Rick Klau's blog</title>
+<style>
+  body{margin:0;font:18px/1.6 Lato,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#111;background:#fff}
+  .banner{background:#1f1f1f;color:#fff;text-align:center;padding:8px 12px;font-size:14px}
+  .banner a{color:#fff}
+  main{max-width:640px;margin:0 auto;padding:4rem 1.5rem}
+  h1{font:600 2.6rem/1.2 'DM Serif Display',Georgia,serif;margin:0 0 1rem}
+  form{display:flex;gap:.5rem;margin:1.5rem 0}
+  input{flex:1;font:inherit;padding:.5rem .7rem;border:1px solid #888;border-radius:4px}
+  button{font:inherit;padding:.5rem 1rem;border:1px solid #888;border-radius:4px;background:#f4f4f4;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="banner">Archive – this blog is no longer updated. · <a class="home" data-path="search/" href="/search/">Search the archive</a></div>
+<main>
+  <h1>Page not found</h1>
+  <p>This page isn't part of the archive of <a class="home" data-path="" href="/">tins ::: Rick Klau's blog</a> (2001–2024). It may have moved, or it may never have existed.</p>
+  <form id="f"><input id="q" type="search" placeholder="Search the archive" aria-label="Search the archive"><button>Search</button></form>
+  <p><a class="home" data-path="" href="/">Go to the home page</a></p>
+</main>
+<script>
+  // Works both at tins.rklau.com/ and at the github.io preview (/tins-archive/).
+  var base = location.hostname.endsWith('github.io') ? '/' + location.pathname.split('/')[1] + '/' : '/';
+  document.querySelectorAll('a.home').forEach(function (a) { a.href = base + a.dataset.path; });
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    location.href = base + 'search/?q=' + encodeURIComponent(document.getElementById('q').value);
+  });
+  var words = location.pathname.replace(base, '').replace(/\.(html?|php)$/, '').split(/[\/\-_]+/)
+    .filter(function (w) { return w.length > 2 && !/^\d+$/.test(w); });
+  if (words.length) document.getElementById('q').value = words.join(' ');
+</script>
+</body>
+</html>
